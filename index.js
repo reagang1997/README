@@ -28,7 +28,7 @@ inquirer
             type: 'list',
             message: 'Which license?',
             choices: [
-                'idk', 'any licenses'
+                'Apache', 'Mozilla', 'MIT'
             ],
             name: 'license'
         },
@@ -45,14 +45,28 @@ inquirer
     ]).then(response => {
         console.log(response);
         const {title, description, install, usage, license, gitUser, gitEmail} = response;
-
+        const inputs = [];
         fsTitle = `# ${title}\n`;
-        fsDescription = `## Description\n${description}`;
-        
-        fs.appendFile('README.md',fsTitle , (err) =>
+        inputs.push(fsTitle);
+        fsDescription = `## Description\n${description}\n`;
+        inputs.push(fsDescription);
+        fsInstall = `## How To Install\n \`\`\`md\n${install}\n\`\`\`\n`;
+        inputs.push(fsInstall);
+        fsUsage = `## How To Run\n \`\`\`md\n${usage}\n\`\`\`\n`
+        inputs.push(fsUsage);
+
+        inputs.forEach(input => {
+            fs.appendFile('README.md',input , (err) =>
             err ? console.error(err) : console.log('Success!') )
-        fs.appendFile('README.md',fsDescription , (err) =>
-        err ? console.error(err) : console.log('Success!') )
+        })
+        
+        
+        // fs.appendFile('README.md',fsDescription , (err) =>
+        //     err ? console.error(err) : console.log('Success!') )
+        // fs.appendFile('README.md',fsInstall , (err) =>
+        //     err ? console.error(err) : console.log('Success!') )
+        // fs.appendFile('README.md',fsUsage , (err) =>
+        //     err ? console.error(err) : console.log('Success!') )
     })
 
 
