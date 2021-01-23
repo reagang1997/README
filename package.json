@@ -1,0 +1,23 @@
+{
+  "name": "README",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reagang1997/README.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reagang1997/README/issues"
+  },
+  "homepage": "https://github.com/reagang1997/README#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
