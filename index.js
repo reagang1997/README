@@ -53,12 +53,24 @@ inquirer
             name: 'contribute'
         }
     ]).then(response => {
-        console.log(response);
-        const {title, description, install, usage, license, gitUser, gitEmail, test, contribute} = response;
-        const inputs = [];
+        const { title, description, install, usage, license, gitUser, gitEmail, test, contribute } = response;
+        let url = "";
+        switch (license) {
+            case "Apache":
+                url = "https://img.shields.io/badge/License-Apache%202.0-blue.svg";
+                break;
+            case "Mozilla":
+                url = "https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg";
+                break;
+            case "MIT":
+                url = "https://img.shields.io/badge/License-MIT-yellow.svg";
+                break;
+        }
 
-        const markdown = 
-`
+            const markdown =
+                `
+![License](${url})
+
 # ${title}
 
 ## Description
@@ -68,7 +80,7 @@ ${description}
 *[Installation](#install)
 *[Usage](#usage)
 *[Contact](#contact)
-*[Contributing](#contribute)
+*[Contributing](#contributing)
 *[Tests](#tests)
 
 ## Installation
@@ -98,14 +110,14 @@ ${gitEmail}
 
 `;
 
-        fs.writeFile('README.md', markdown , (err) =>
-            err ? console.error(err) : console.log('Generating README...') )
-        
+        fs.writeFile('README.md', markdown, (err) =>
+            err ? console.error(err) : console.log('Generating README...'))
 
 
-            
-       
-        
+
+
+
+
     })
 
 
