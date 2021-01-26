@@ -1,10 +1,10 @@
 
-![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 # README Generator
 
 ## Description
 Generates beautiful readmes
+[Video Walkthrough](https://streamable.com/tuy2kl)
 
 ## Table Of Contents
 *[Installation](#install)
@@ -21,9 +21,6 @@ npm install
 
 ## Usage
 Navigate to the root folder and run the command node ./index.js
-
-## License
-This product is licensed under the Apache license.
 
 ## Tests
 To test, run the following command:
