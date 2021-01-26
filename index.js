@@ -6,6 +6,16 @@ inquirer
     .prompt([
         {
             type: 'input',
+            message: 'What is your GitHub username',
+            name: 'gitUser'
+        },
+        {
+            type: 'input',
+            message: 'What is your GitHub email?',
+            name: 'gitEmail'
+        },
+        {
+            type: 'input',
             message: 'What is the title of your project?',
             name: 'title'
         },
@@ -13,16 +23,6 @@ inquirer
             type: 'input',
             message: 'Enter a short description of the project',
             name: 'description'
-        },
-        {
-            type: 'input',
-            message: 'What to do to instal?',
-            name: 'install'
-        },
-        {
-            type: 'input',
-            message: 'What command to run?',
-            name: 'usage'
         },
         {
             type: 'list',
@@ -34,39 +34,78 @@ inquirer
         },
         {
             type: 'input',
-            message: 'What is your GitHub username',
-            name: 'gitUser'
+            message: 'What command should be ran to install dependencies?',
+            name: 'install'
         },
         {
             type: 'input',
-            message: 'What is your GitHub email?',
-            name: 'gitEmail'
+            message: 'What command should be ran to run tests?',
+            name: 'test'
+        },
+        {
+            type: 'input',
+            message: 'What does the user need to know about using the repo?',
+            name: 'usage'
+        },
+        {
+            type: 'input',
+            message: 'What does the user need to know about contributing to the repo?',
+            name: 'contribute'
         }
     ]).then(response => {
         console.log(response);
-        const {title, description, install, usage, license, gitUser, gitEmail} = response;
+        const {title, description, install, usage, license, gitUser, gitEmail, test, contribute} = response;
         const inputs = [];
-        fsTitle = `# ${title}\n`;
-        inputs.push(fsTitle);
-        fsDescription = `## Description\n${description}\n`;
-        inputs.push(fsDescription);
-        fsInstall = `## How To Install\n \`\`\`md\n${install}\n\`\`\`\n`;
-        inputs.push(fsInstall);
-        fsUsage = `## How To Run\n \`\`\`md\n${usage}\n\`\`\`\n`
-        inputs.push(fsUsage);
 
-        inputs.forEach(input => {
-            fs.appendFile('README.md',input , (err) =>
-            err ? console.error(err) : console.log('Success!') )
-        })
+        const markdown = 
+`
+# ${title}
+
+## Description
+${description}
+
+## Table Of Contents
+*[Installation](#install)
+*[Usage](#usage)
+*[Contact](#contact)
+*[Contributing](#contribute)
+*[Tests](#tests)
+
+## Installation
+To install the necessary dependencies, run the following command:
+\`\`\`md\n${install}\n\`\`\`
+
+## Usage
+${usage}
+
+## License
+This product is licensed under the ${license} license.
+
+## Tests
+To test, run the following command:
+\`\`\`md\n${test}\n\`\`\`
+
+## Contributing
+${contribute}
+
+
+## Contact
+### GitHub Username
+${gitUser}
+
+### GitHub email
+${gitEmail}
+
+`;
+
+        fs.writeFile('README.md', markdown , (err) =>
+            err ? console.error(err) : console.log('Generating README...') )
         
+
+
+            
+       
         
-        // fs.appendFile('README.md',fsDescription , (err) =>
-        //     err ? console.error(err) : console.log('Success!') )
-        // fs.appendFile('README.md',fsInstall , (err) =>
-        //     err ? console.error(err) : console.log('Success!') )
-        // fs.appendFile('README.md',fsUsage , (err) =>
-        //     err ? console.error(err) : console.log('Success!') )
     })
 
 
